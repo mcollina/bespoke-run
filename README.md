@@ -23,6 +23,8 @@ bespoke.horizontal.from('article', {
 });
 ```
 
+You should also include jQuery or a jQuery-compatible library.
+
 ## Package managers
 
 ### Bower
