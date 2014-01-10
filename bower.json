@@ -2,6 +2,7 @@
   "name": "bespoke-run",
   "version": "0.0.0",
   "dependencies": {
-    "bespoke.js": ">=0.3.0"
+    "bespoke.js": ">=0.3.0",
+    "jquery": "~2.0.3"
   }
 }

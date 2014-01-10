@@ -1,22 +1,37 @@
+
+var lastCalledValue = null;
+
+function dummyCall(value) {
+  lastCalledValue = value;
+}
+
 (function() {
   'use strict';
 
   describe("bespoke-run", function() {
 
-    var deck,
+    var deck;
 
-      createDeck = function() {
-        var parent = document.createElement('article');
-        for (var i = 0; i < 10; i++) {
-          parent.appendChild(document.createElement('section'));
-        }
+    var createDeck = function() {
+      var parent = $("<article>");
 
-        deck = bespoke.from(parent, {
-          run: true
-        });
-      };
+      var section = $("<section>");
+      section.append("<code>dummyCall(true);</code>")
+      section.append("<a data-bespoke-run>Run!</a>")
+
+      parent.append(section);
+      $("body").append(parent);
+
+      deck = bespoke.from(parent.get(0), {
+        run: true
+      });
+    };
 
     beforeEach(createDeck);
+
+    afterEach(function() {
+      lastCalledValue = null;
+    });
 
     describe("deck.slide", function() {
 
@@ -24,10 +39,14 @@
         deck.slide(0);
       });
 
-      it("should not add a useless 'foobar' class to the slide", function() {
-        expect(deck.slides[0].classList.contains('foobar')).toBe(false);
+      it("should add a href to the run link", function() {
+        expect($("a[data-bespoke-run]").attr("href")).toEqual("#");
       });
 
+      it("should execute the current code", function() {
+        $("a[data-bespoke-run]").click();
+        expect(lastCalledValue).toBe(true);
+      });
     });
 
   });
