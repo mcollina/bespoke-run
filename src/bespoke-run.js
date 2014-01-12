@@ -1,13 +1,17 @@
 bespoke.plugins.run = function(deck) {
 
-  var runners = $("[data-bespoke-run]");
-  runners.attr("href", "#");
+  [].forEach.call(document.querySelectorAll("[data-bespoke-run]"), function(runner) {
 
-  runners.click(function() {
-    var script = $(".bespoke-active code").text();
+    runner.setAttribute("href", "#");
 
-    new Function(script)();
+    runner.addEventListener("click", function(e) {
+      var script = document.querySelector(".bespoke-active code").innerHTML;
 
-    return false;
+      new Function(script)();
+
+      e.preventDefault();
+    });
+
   });
+
 };

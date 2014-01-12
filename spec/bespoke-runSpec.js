@@ -13,18 +13,25 @@ function dummyCall(value) {
     var deck;
 
     var createDeck = function() {
-      var parent = $("<article>");
+      var parent = document.createElement("article");
 
-      var section = $("<section>");
-      section.append("<code>dummyCall(true);</code>")
-      section.append("<a data-bespoke-run>Run!</a>")
+      var section = document.createElement("section");
+      section.innerHTML =
+        "<code>dummyCall(true);</code>" +
+        "<a data-bespoke-run>Run!</a>";
 
-      parent.append(section);
-      $("body").append(parent);
+      parent.appendChild(section);
+      document.body.appendChild(parent);
 
-      deck = bespoke.from(parent.get(0), {
+      deck = bespoke.from(parent, {
         run: true
       });
+    };
+
+    var click = function(el){
+      var ev = document.createEvent("MouseEvent");
+      ev.initMouseEvent( "click", true /* bubble */, true /* cancelable */, window, null, 0, 0, 0, 0, /* coordinates */ false, false, false, false, /* modifier keys */ 0 /*left*/, null);
+      el.dispatchEvent(ev);
     };
 
     beforeEach(createDeck);
@@ -40,11 +47,11 @@ function dummyCall(value) {
       });
 
       it("should add a href to the run link", function() {
-        expect($("a[data-bespoke-run]").attr("href")).toEqual("#");
+        expect(document.querySelector("a[data-bespoke-run]").getAttribute("href")).toEqual("#");
       });
 
       it("should execute the current code", function() {
-        $("a[data-bespoke-run]").click();
+        [].forEach.call(document.querySelectorAll("a[data-bespoke-run]"), click);
         expect(lastCalledValue).toBe(true);
       });
     });
