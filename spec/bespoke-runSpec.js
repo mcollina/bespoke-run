@@ -20,7 +20,13 @@ function dummyCall(value) {
         "<code>dummyCall(true);</code>" +
         "<a data-bespoke-run>Run!</a>";
 
+      var section2 = document.createElement("section");
+      section.innerHTML =
+        "<code>dummyCall(<b>true</b>);</code>" +
+        "<a data-bespoke-run>Run!</a>";
+
       parent.appendChild(section);
+      parent.appendChild(section2);
       document.body.appendChild(parent);
 
       deck = bespoke.from(parent, {
@@ -51,7 +57,12 @@ function dummyCall(value) {
       });
 
       it("should execute the current code", function() {
-        [].forEach.call(document.querySelectorAll("a[data-bespoke-run]"), click);
+        click(document.querySelectorAll("a[data-bespoke-run]")[0]);
+        expect(lastCalledValue).toBe(true);
+      });
+
+      it("should execute the code even if it contains markup", function() {
+        click(document.querySelectorAll("a[data-bespoke-run]")[1]);
         expect(lastCalledValue).toBe(true);
       });
     });

@@ -5,7 +5,7 @@ bespoke.plugins.run = function(deck) {
     runner.setAttribute("href", "#");
 
     runner.addEventListener("click", function(e) {
-      var script = document.querySelector(".bespoke-active code").innerHTML;
+      var script = document.querySelector(".bespoke-active code").innerText;
 
       new Function(script)();
 
