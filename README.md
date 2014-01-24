@@ -23,6 +23,26 @@ bespoke.from('article', {
 });
 ```
 
+When you want to run a piece of code in your browser, just put it
+between `<code></code>` tags, then add an anchor with the
+`'data-bespoke-run'` property, like so:
+
+```javascript
+<section>
+  <code>alert(2 + 2)</code>
+  <a data-bespoke-run>Run!</a>
+</section>
+```
+
+If you want your code snippet to run automatically before advancing to
+the next slide, just do:
+
+```javascript
+<section>
+  <code data-bespoke-autorun>alert(2 + 2)</code>
+</section>
+```
+
 ## Package managers
 
 ### Bower
