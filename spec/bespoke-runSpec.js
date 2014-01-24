@@ -21,12 +21,22 @@ function dummyCall(value) {
         "<a data-bespoke-run>Run!</a>";
 
       var section2 = document.createElement("section");
-      section.innerHTML =
+      section2.innerHTML =
         "<code>dummyCall(<b>true</b>);</code>" +
         "<a data-bespoke-run>Run!</a>";
 
+      var section3 = document.createElement("section");
+      section3.innerHTML =
+        "<code data-bespoke-autorun>dummyCall(<b>true</b>);</code>";
+
+      var section4 = document.createElement("section");
+      section4.innerHTML =
+        "<b>Hello world</b>";
+
       parent.appendChild(section);
       parent.appendChild(section2);
+      parent.appendChild(section3);
+      parent.appendChild(section4);
       document.body.appendChild(parent);
 
       deck = bespoke.from(parent, {
@@ -64,6 +74,20 @@ function dummyCall(value) {
       it("should execute the code even if it contains markup", function() {
         click(document.querySelectorAll("a[data-bespoke-run]")[1]);
         expect(lastCalledValue).toBe(true);
+      });
+
+      it("should execute the code automatically before next if there is autorun", function() {
+        deck.slide(2);
+        deck.next();
+        expect(deck.slide()).toBe(2);
+        expect(lastCalledValue).toBe(true);
+      });
+
+      it("should move to the following slide after autorun", function() {
+        deck.slide(2);
+        deck.next();
+        deck.next();
+        expect(deck.slide()).toBe(3);
       });
     });
 
