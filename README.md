@@ -43,6 +43,16 @@ the next slide, just do:
 </section>
 ```
 
+### Incompatibilities
+
+This module has to be included __before__ 'bullets', like so:
+```javascript
+bespoke.from('article', {
+  run: true,
+  bullets: true
+});
+```
+
 ## Package managers
 
 ### Bower

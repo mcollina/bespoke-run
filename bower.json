@@ -1,6 +1,6 @@
 {
   "name": "bespoke-run",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "bespoke.js": ">=0.3.0"
   }
