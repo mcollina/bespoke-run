@@ -30,6 +30,10 @@ function dummyCall(value) {
         "<code data-bespoke-autorun>dummyCall(<b>true</b>);</code>";
 
       var section4 = document.createElement("section");
+      section3.innerHTML =
+        "<code data-bespoke-autorun>dummyCall(<b>true</b>);</code>";
+
+      var section5 = document.createElement("section");
       section4.innerHTML =
         "<b>Hello world</b>";
 
@@ -84,10 +88,28 @@ function dummyCall(value) {
       });
 
       it("should move to the following slide after autorun", function() {
-        deck.slide(2);
+        deck.slide(3);
         deck.next();
         deck.next();
         expect(deck.slide()).toBe(3);
+      });
+
+      it("should move to the following slide after autorun", function() {
+        deck.slide(3);
+        deck.next();
+        deck.next();
+        expect(deck.slide()).toBe(3);
+      });
+
+      it("should autorun after prev", function() {
+        deck.slide(2);
+        deck.next();
+        deck.next();
+        lastCalledValue = false;
+        deck.prev();
+        deck.next();
+        expect(deck.slide()).toBe(2);
+        expect(lastCalledValue).toBe(true);
       });
     });
 
