@@ -1,6 +1,6 @@
 {
   "name": "bespoke-run",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Run your code snippets in Bespoke.js",
   "homepage": "https://github.com/mcollina/bespoke-run",
   "bugs": "https://github.com/mcollina/bespoke-run/issues",
@@ -15,7 +15,7 @@
     "url": "git://github.com/mcollina/bespoke-run.git"
   },
   "scripts": {
-    "test": "grunt"
+    "test": "gulp test"
   },
   "peerDependencies": {
     "bespoke": "^1.0.0"

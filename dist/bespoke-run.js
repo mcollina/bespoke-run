@@ -1,5 +1,5 @@
 /*!
- * bespoke-run v0.1.1
+ * bespoke-run v1.0.0
  * https://github.com/mcollina/bespoke-run
  *
  * Copyright 2014, Matteo Collina
