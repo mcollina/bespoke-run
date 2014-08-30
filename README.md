@@ -13,14 +13,29 @@ Download the [production version][min] or the [development version][max], or use
 
 ## Usage
 
-First, include both `bespoke.js` and `bespoke-run.js` in your page.
+This plugin is shipped in a [UMD format](https://github.com/umdjs/umd), meaning that it is available as a CommonJS/AMD module or browser global.
 
-Then, simply include the plugin when instantiating your presentation.
+For example, when using CommonJS modules:
+```
 
 ```js
-bespoke.from('article', {
-  run: true
-});
+var bespoke = require('bespoke'),
+  classes = require('bespoke-classes');
+  camera = require('bespoke-run');
+
+bespoke.from('article', [
+  classes(),
+  run()
+]);
+```
+
+When using browser globals:
+
+```js
+bespoke.from('article', [
+  bespoke.plugins.classes(),
+  bespoke.plugins.run()
+]);
 ```
 
 When you want to run a piece of code in your browser, just put it
@@ -43,16 +58,6 @@ the next slide, just do:
 </section>
 ```
 
-### Incompatibilities
-
-This module has to be included __before__ 'bullets', like so:
-```javascript
-bespoke.from('article', {
-  run: true,
-  bullets: true
-});
-```
-
 ## Package managers
 
 ### Bower
@@ -65,13 +70,6 @@ $ bower install bespoke-run
 
 ```bash
 $ npm install bespoke-run
-```
-
-The bespoke-run npm package is designed for use with [browserify](http://browserify.org/), e.g.
-
-```js
-require('bespoke');
-require('bespoke-run');
 ```
 
 ## Credits
