@@ -5,14 +5,24 @@ function dummyCall(value) {
   lastCalledValue = value;
 }
 
+window.dummyCall = dummyCall;
+
 (function() {
   'use strict';
+
+  Function.prototype.bind = Function.prototype.bind || require('function-bind');
+
+  var bespoke = require('bespoke'),
+    classes = require('bespoke-classes'),
+    run = require('../lib-instrumented/bespoke-run.js');
+
+  require('simulant/simulant');
 
   describe("bespoke-run", function() {
 
     var deck;
 
-    var createDeck = function() {
+    (function() {
       var parent = document.createElement("article");
 
       var section = document.createElement("section");
@@ -43,18 +53,15 @@ function dummyCall(value) {
       parent.appendChild(section4);
       document.body.appendChild(parent);
 
-      deck = bespoke.from(parent, {
-        run: true
-      });
-    };
+      deck = bespoke.from(parent, [
+        classes(),
+        run()
+      ]);
+    })();
 
-    var click = function(el){
-      var ev = document.createEvent("MouseEvent");
-      ev.initMouseEvent( "click", true /* bubble */, true /* cancelable */, window, null, 0, 0, 0, 0, /* coordinates */ false, false, false, false, /* modifier keys */ 0 /*left*/, null);
-      el.dispatchEvent(ev);
+    var click = function(target){
+      simulant.fire( target, 'click' );
     };
-
-    beforeEach(createDeck);
 
     afterEach(function() {
       lastCalledValue = null;
